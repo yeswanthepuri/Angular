@@ -1,0 +1,84 @@
+<form #form="ngForm" ngNativeValidation (ngSubmit)="Onsubmit(form)">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input class="form-control" name="Name" type="text" [(ngModel)]="userSetting.Name" required
+            #PropertyTest="ngModel" #classTest (blur)="Onblur(PropertyTest)"
+            [class.field-error]="form.submitted && PropertyTest.invalid">
+    </div>
+    <div [hidden]="!form.submitted || PropertyTest.untouched" class="alert alert-danger">
+        Enter Name
+    </div>
+    <h1>Class testing</h1>
+    <h5>{{classTest.className}}</h5>
+    <h1>Property testing</h1>
+    <h5>dirty: {{PropertyTest.dirty}}</h5>
+    <h5>pristine: {{PropertyTest.pristine}}</h5>
+    <h5>touched: {{PropertyTest.touched}}</h5>
+    <h5>Un-touched: {{PropertyTest.untouched}}</h5>
+    <h5>Valid: {{PropertyTest.valid}}</h5>
+    <h5>In-valied: {{PropertyTest.invalid}}</h5>
+    <button type="button" class="btn btn-primary" [(ngModel)]="singleModel" btnCheckbox btnCheckboxTrue="On"
+        name="singleModel" btnCheckboxFalse="Off">
+        {{singleModel}}
+    </button>
+    <div class="col-xs-12 col-12 col-md-4 form-group">
+        <label for="startDate">
+            Start date
+        </label>
+        <input type="text" [(ngModel)]="startDate" name="startDate" placeholder="Datepicker" class="form-control"
+            bsDatepicker>
+    </div>
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <input class="form-control" name="Password" type="Password" [(ngModel)]="userSetting.Password">
+    </div>
+    <div class="form-check form-group">
+        <input class="form-check-input" type="checkbox" id="emailOffers" name="emailOffers"
+            [(ngModel)]="userSetting.emailOffers">
+        <label class="form-check-label" for="emailOffers">Email Special Offer</label>
+    </div>
+    <h5>User interface style</h5>
+    <div class="btn-group">
+        <label class="btn btn-primary" [(ngModel)]="userSetting.Interfacestyle" name="Interfacestyle" btnRadio="Light"
+            tabindex="0" role="button">Light</label>
+        <label class="btn btn-primary" [(ngModel)]="userSetting.Interfacestyle" name="Interfacestyle" btnRadio="Medium"
+            tabindex="0" role="button">Medium</label>
+        <label class="btn btn-primary" [(ngModel)]="userSetting.Interfacestyle" name="Interfacestyle" btnRadio="Dark"
+            tabindex="0" role="button">Dark</label>
+    </div>
+    <!-- <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Interfacestyle" value="Light" id="LightInterface"
+                [(ngModel)]="userSetting.Interfacestyle" />
+            <label class="form-check-label" for="LightInterface">Light</label>
+        </div>
+        <div class="form-check ">
+            <input class="form-check-input" type="radio" name="Interfacestyle" value="Medium" id="MediumInterface"
+                [(ngModel)]="userSetting.Interfacestyle" />
+            <label class="form-check-label" for="MediumInterface">Medium</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Interfacestyle" value="Dark" id="DarkInterface"
+                [(ngModel)]="userSetting.Interfacestyle" />
+            <label class="form-check-label" for="DarkInterface">Dark</label>
+        </div>
+    </div> -->
+    <div class="form-group">
+        <label for="subscriptionType"></label>
+        <select class="form-control" name="subscriptionType" id="subscriptionType"
+            [(ngModel)]="userSetting.subscriptionType">
+            <option *ngFor="let type of subscriptionTypes |async">
+                {{type}}
+            </option>
+            <!-- <option>Annual</option>
+            <option>Life time</option> -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Notes">Name</label>
+        <textarea rows="3" class="form-control" name="Notes" [(ngModel)]="userSetting.Notes"></textarea>
+    </div>
+    <button class="btn btn-success">Ok</button>
+</form>
+
+<h2>{{form.value | json}}</h2>
